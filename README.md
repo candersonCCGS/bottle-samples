@@ -11,4 +11,4 @@ To use the sample databases:
 4. Run the app by typing __python <app_name>__ at the command prompt in the terminal
 5. Open your web browser and navigate to __localhost:8080__ (or change to whatever port number your app is using)
 
-NOTE: If the webserver starts and returns a 404: File not found error, make sure that app python file is being executed from the correct folder.
+NOTE: If the webserver starts and returns a 404: File not found error, make sure that command prompt is in the same folder as the python app file.
