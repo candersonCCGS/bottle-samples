@@ -13,7 +13,7 @@
 #   2. Save the csv files with the data for each table in your database in this folder
 #         - one csv file for each table in your database
 #         - first row should be the field names
-#   3. Save this Python script in your web app folder
+#   3. Save this Python script in the scripts folder of your web app folder
 #   3. Update the variables below with the lists of file names and database file etc
 #   4. Run the Python script from the web app folder
 #
@@ -97,8 +97,9 @@ def endFile(out_file):
 # These are the input csv files for your data.
 # NOTE:
 #   1. all csv files need to be in a folder called Raw Data
-#   2. the first line in each csv file should contain the list of name of each field
-#   3. data needs to be entered in the correct order to ensure referential integrity
+#   2. the first line in each csv file should contain the name of each field
+#   3. tables need to be entered in the correct order to ensure referential integrity
+#      That is, tables that are referenced by other tables need to be entered first
 in_files = ["Product", "Region", "Brand", "Area", "Station", "Price"]
 
 # These are the tables that each csv file corresponds to
