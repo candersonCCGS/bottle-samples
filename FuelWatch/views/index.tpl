@@ -6,8 +6,10 @@
     </head>
     <body>
         <div id="container">
-            <h1>Data from the Fuel Watch website</h1>
-
+            <header>
+                <h1>Data from the Fuel Watch website</h1>
+            </header>
+            
             <div class="querySection">
                 <p><a href="/create_db">Create a fresh database (with no data)</a></p>
                 <p><a href="/insert_data">Insert Test Database</a></p>
