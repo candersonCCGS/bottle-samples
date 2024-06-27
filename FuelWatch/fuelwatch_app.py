@@ -10,6 +10,7 @@ import queries
 #
 DATABASE_FILE = 'fuelwatch.db'
 
+
 ##################################################
 #
 # Routes for each page
@@ -19,6 +20,7 @@ DATABASE_FILE = 'fuelwatch.db'
 def index():
     return template('index')
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Queries to create a fresh database and insert data into the database
 @route('/create_db')
 def create_db():
@@ -32,6 +34,7 @@ def insert_data():
     result = insert_db_data.insert_table_data(DATABASE_FILE)
     return  template('insert_data', success=result)
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Hard coded queries that always return the same results
 @route('/select_all_stations')
 def select_all_stations():
@@ -61,6 +64,7 @@ def select_stations_per_city():
     query = queries.SELECT_STATIONS_PER_CITY
     return get_template(query, title, description)
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Queries that require the use of a form.
 # NOTE: For these queries the form is embedded in the home page
 @route('/select_stations_in_area', method='POST')
@@ -84,6 +88,7 @@ def select_brands_in_region():
     query = queries.SELECT_BRANDS_IN_REGION
     return get_template_with_parameters(query, values, title, description)
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Queries that use a form on another page
 @route('/select_stations_in_region')
 def select_stations_in_region():
@@ -99,10 +104,13 @@ def select_stations_in_region():
     query = queries.SELECT_STATIONS_IN_REGION
     return get_template_with_parameters(query, values, title, description)
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Static CSS Files
 @route('/static/<filename>')
 def static(filename):
     return static_file(filename, root='./static')
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ##################################################
 #
@@ -132,12 +140,8 @@ def get_template(query, title='Query Results', description='This page shows the 
 
 def get_template_with_parameters(query, values, title='Query Results', description='This page shows the results of a query'):
     result = run_query_with_parameters(query, values)
-    if len(result) > 0:
-        page = template('results', title=title, description=description, records=result)
-    else:
-        page = template('no_results', title=title, description=description)
+    page = template('results', title=title, description=description, records=result)
     return page
-
 
 ##################################################
 #

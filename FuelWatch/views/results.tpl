@@ -13,6 +13,9 @@
         <h1>{{ title }}</h1>
         <p>{{ description }}</p>
 
+        % if len(records) < 1:
+        <p><strong>No records found</strong></p>
+        % else:
         <table>
             <tr>
                 % for field in records[0].keys():
@@ -27,6 +30,7 @@
             </tr>
             % end
         </table>
+        %end
 
         <footer>
             <p><a href="/">Return to Home Page</a></p>
