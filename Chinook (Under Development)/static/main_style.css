@@ -1,0 +1,119 @@
+:root {    --base: #D2E4F1;
+    --colour1: #8facc0;
+    --colour2: #818d97;
+    --colour3: #484d51;
+
+    --white-space: white;
+    --main-heading: var(--colour3);
+    --main-background: var(--base);
+    --main-text: var(--colour3);
+    --border-colour: var(--colour3);
+}
+
+body {
+    background: var(--white-space);
+}
+
+h1 {
+    background-color: var(--main-background);
+    color: var(--main-heading);
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.querySection {
+    border: var(--border-colour) 6px solid;
+    border-radius: 10px;
+    margin: 5px auto;
+    padding: 10px;
+}
+
+.queryForm {
+    border-radius: 10px;
+    background-color: var(--main-background);
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.queryForm h3 {
+    margin: 0px auto;
+    color: var(--main-text);
+}
+
+#container {
+    margin: auto;
+    width: 1000px;
+}
+
+.querySection p {
+    margin: 0;
+    padding: 0;
+}
+
+.querySection a {
+    background-color: var(--main-background);
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--main-text);
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+header, footer {
+    background-color: var(--main-background);
+    padding: 5px 20px;
+    /* border-radius: 10px;
+    color: #2F5233;
+    margin-top: 15px;
+    margin-bottom: 15px; */
+}
+
+header a, footer a {
+    background-color: var(--main-background);
+    padding: 10px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--main-text);
+    display: block;
+    text-align: center;
+    font-size: larger;
+}
+
+header h1 {
+    background-color: var(--main-background);
+    padding: 0px;
+}
+
+header p, footer p {
+    text-align: center;
+}
+
+table {
+    margin: 5px auto;
+}
+
+table tr {
+    border-collapse: collapse;
+    border: var(--border-colour) 2px solid;
+}
+
+thead tr {
+    background-color: var(--colour3);
+    color: var(--base);
+}
+
+th {
+    padding: 10px 5px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--colour1);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: var(--colour2);
+}
