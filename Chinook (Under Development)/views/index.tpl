@@ -7,9 +7,11 @@
 </section> 
 -->
 % include('page_heading.tpl', name='Welcome to Chinook!')
-<section class="querySection">
-    <h4>Hardcoded scripts to give the user specific information</h4>
-    <p><a href="/albums"><strong>Albums</strong></a></p>
-    <p><a href="/customers"><strong>Customers</strong></a></p>
-    <p><a href="/orders"><strong>Orders</strong></a></p>
+<section class="introduction">
+    <p>Chinook music has the most comprehensive collection of music anywhere!</p>
+    <nav>
+        <a class="button" href="/albums"><strong>Albums</strong></a>
+        <a class="button" href="/customers"><strong>Customers</strong></a>
+        <a class="button" href="/orders"><strong>Orders</strong></a>
+    </nav>
 </section>
