@@ -73,6 +73,29 @@ def select_all_albums():
     query = queries.SELECT_ALL_CUSTOMERS
     return get_template(query, title, description)
 
+@route('/insert_new_customer', method='POST')
+def insert_new_customer():
+    first_name = request.forms.get('first_name')
+    last_name = request.forms.get('last_name')
+    email = request.forms.get('email')
+    form_data = dict(request.params)
+    query = '''INSERT INTO Customer (FirstName, LastName, Email) VALUES (:first_name, :last_name, :email)'''
+    result = run_insert_query(query, form_data)
+    return f'''<h1>Customer inserted - {result}</h1>
+                <p>{first_name} {last_name} {email}</p>
+                <p>{form_data}</p>'''
+
+@route('/remove_customer', method='POST')
+def remove_customer():
+    customer_id = request.forms.get('customer_id')
+    values = { 'customer_id': customer_id }
+    query = '''
+                DELETE FROM Customer
+                WHERE CustomerId = :customer_id
+            '''
+    result = run_insert_query(query, values)
+    return f'''<h1>Customer {customer_id} removed</h1>'''
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Queries to find information about Orders
 @route('/select_all_orders')
@@ -111,6 +134,24 @@ def run_query_with_parameters(query, values):
     connection.close()
 
     return result
+
+def run_insert_query(query, values):
+    try:
+        connection = get_db_connection()
+        cursor = connection.cursor()
+
+        cursor.execute(query, values)
+
+        connection.commit()
+        connection.close()
+
+        return "success"
+    
+    except Exception as e:
+        print("Error: ", e)
+        connection.rollback()
+        connection.close()
+        return "error"
 
 def get_template(query, title='Query Results', description='This page shows the results of a query'):
     return get_template_with_parameters(query, {}, title, description)
