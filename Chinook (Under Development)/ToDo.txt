@@ -1,0 +1,2 @@
+- create a table.tpl file that creates a table and can be included in other templates.
+  That way, can inclukde tables in multiple pages more easily.
