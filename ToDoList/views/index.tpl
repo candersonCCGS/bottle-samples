@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>My To Do List</title>
+        <link type="text/css" href='/static/style.css' rel="stylesheet">
     </head>
     <body>
         <h1>My To Do List</h1>
@@ -34,6 +35,28 @@
                 </table>
                 % end
             % end
+        </section>
+        <section>
+            <form action="/add_task" method="post">
+                <h3>Add a new task.</h3>
+                Title: <input type="text" name="title" /><br />
+                Description: <input type="text" name="description" /><br />
+                <input type="submit">
+            </form>
+        </section>
+        <section>
+            <form action="/complete_task" method="post">
+                <h3>Mark a task as completed.</h3>
+                Task Id: <input type="text" name="task_id" /><br />
+                <input type="submit">
+            </form>
+        </section>
+        <section>
+            <form action="/remove_task" method="post">
+                <h3>Remove a task.</h3>
+                Task Id: <input type="text" name="task_id" /><br />
+                <input type="submit">
+            </form>
         </section>
         <footer>
             <p>A To Do list using the Bottle framework</p>

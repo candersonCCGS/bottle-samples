@@ -1,4 +1,4 @@
-from bottle import route, run, template
+from bottle import route, run, template, request, static_file
 import sqlite3
 
 ##################################################
@@ -73,6 +73,64 @@ def show_to_do_list():
     connection.close()
 
     return template('index', records=tasks)
+
+# Add new task
+@route('/add_task', method='POST')
+def add_task():
+    connection = sqlite3.connect('todo_list.sqlite')
+    cursor = connection.cursor()
+
+    # Retrieve the values from the form as a dictionary
+    # NOTE: HTML form field names (from the template) must match parameter names in INSERT query
+    form_data = dict(request.params)
+    query = 'INSERT INTO Task (title, description) VALUES (:title, :description)'
+    cursor.execute(query, form_data)
+
+    connection.commit()
+    connection.close()
+
+    return template('index')
+
+# Mark task as completed
+@route('/complete_task', method='POST')
+def complete_task():
+    connection = sqlite3.connect('todo_list.sqlite')
+    cursor = connection.cursor()
+
+    task_id = request.forms.get('task_id')
+    values = { 'task_id' : task_id }
+    query = '''
+            UPDATE Task 
+            SET completed = TRUE
+            WHERE task_id = :task_id
+            '''
+    cursor.execute(query, values)
+
+    connection.commit()
+    connection.close()
+
+    return template('index')
+
+# Add new task
+@route('/remove_task', method='POST')
+def remove_task():
+    connection = sqlite3.connect('todo_list.sqlite')
+    cursor = connection.cursor()
+
+    task_id = request.forms.get('task_id')
+    values = { 'task_id' : task_id }
+    query = 'DELETE FROM Task WHERE task_id = :task_id'
+    cursor.execute(query, values)
+
+    connection.commit()
+    connection.close()
+
+    return template('index')
+
+# Static files
+@route('/static/<filename>')
+def static(filename):
+    return static_file(filename, root='./static')
 
 ##################################################
 #

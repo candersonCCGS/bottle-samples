@@ -1,0 +1,18 @@
+body {
+    background-color: lightsteelblue;
+}
+
+section {
+    border: solid 3px;
+    margin: 10px;
+    padding: 5px;
+}
+
+table, td, th {
+    border: solid 1px;
+    border-collapse: collapse;
+}
+
+h1, footer {
+    text-align: center;
+}
