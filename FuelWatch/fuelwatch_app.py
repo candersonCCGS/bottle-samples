@@ -75,7 +75,7 @@ def select_find_cities():
     title = f'Stations in {area_value}'
     description = f'This page shows the number of stations in {area_value}'
     query = queries.SELECT_STATIONS_IN_AREA
-    return get_template_with_parameters(query, values, title, description)
+    return get_template(query, title, description, values)
 
 @route('/select_brands_in_region', method='POST')
 def select_brands_in_region():
@@ -86,7 +86,7 @@ def select_brands_in_region():
     title = f'Stations in {region_value}'
     description = f'The following table shows all the {brand_value} stations in the {region_value} region.'
     query = queries.SELECT_BRANDS_IN_REGION
-    return get_template_with_parameters(query, values, title, description)
+    return get_template(query, title, description, values)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Queries that use a form on another page
@@ -102,7 +102,7 @@ def select_stations_in_region():
     title = f'Stations in {region_value}'
     description = f'The following table shows all the stations in the {region_value} region.'
     query = queries.SELECT_STATIONS_IN_REGION
-    return get_template_with_parameters(query, values, title, description)
+    return get_template(query, title, description, values)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Static CSS Files
@@ -121,10 +121,7 @@ def get_db_connection():
     connection.row_factory = sqlite3.Row
     return connection
 
-def run_query(query):
-    return run_query_with_parameters(query, {})
-
-def run_query_with_parameters(query, values):
+def run_query(query, values={}):
     connection = get_db_connection()
     cursor = connection.cursor()
 
@@ -135,11 +132,8 @@ def run_query_with_parameters(query, values):
 
     return result
 
-def get_template(query, title='Query Results', description='This page shows the results of a query'):
-    return get_template_with_parameters(query, {}, title, description)
-
-def get_template_with_parameters(query, values, title='Query Results', description='This page shows the results of a query'):
-    result = run_query_with_parameters(query, values)
+def get_template(query, title='Query Results', description='This page shows the results of a query', values={}):
+    result = run_query(query, values)
     page = template('results', title=title, description=description, records=result)
     return page
 
